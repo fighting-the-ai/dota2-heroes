@@ -1,6 +1,20 @@
-import Head from 'next/head'
+import { useEffect, useState, useMemo } from "react";
+import Head from "next/head";
+import { Hero } from "@/types";
+import { error } from "console";
 
 export default function Home() {
+  const [heroes, setHeroes] = useState<Hero[] | null>(null);
+
+  useEffect(() => {
+    fetch("https://api.opendota.com/api/heroes")
+      .then((res) => res.json())
+      .then((data: Hero[]) => {
+        setHeroes(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <>
       <Head>
@@ -10,8 +24,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        Test
+        <div className="flex justify-center items-center w-full">
+          <ol>
+            {heroes?.map((value) => {
+              return <li key={value.id}>{value.localized_name}</li>;
+            })}
+          </ol>
+        </div>
       </main>
     </>
-  )
+  );
 }
+
+// Listar somente os de inteligênciaa
