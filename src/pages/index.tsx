@@ -1,19 +1,31 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
-import { Hero } from "@/types";
-import { error } from "console";
+import Image from "next/image";
+import { Hero, AttackType, PrimaryAttr } from "@/types";
+import { twMerge } from "tailwind-merge";
+import { Button } from "@/components/Button";
 
 export default function Home() {
   const [heroes, setHeroes] = useState<Hero[] | null>(null);
+  const [primaryAttr, setPrimaryAttr] = useState<PrimaryAttr | null>(null);
+  const [attackType, setAttackType] = useState<AttackType | null>(null);
 
   useEffect(() => {
-    fetch("https://api.opendota.com/api/heroes")
+    fetch("https://api.opendota.com/api/heroStats")
       .then((res) => res.json())
       .then((data: Hero[]) => {
         setHeroes(data);
       })
       .catch((error) => console.error(error));
   }, []);
+
+  function handleAttackType(newAttackType: AttackType) {
+    setAttackType((attackType) => (attackType === newAttackType ? null : newAttackType));
+  }
+
+  function handleAttr(newAttr: PrimaryAttr) {
+    setPrimaryAttr((primaryAttr) => (primaryAttr === newAttr ? null : newAttr));
+  }
 
   return (
     <>
@@ -23,17 +35,103 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <div className="flex justify-center items-center w-full">
-          <ol>
-            {heroes?.map((value) => {
-              return <li key={value.id}>{value.localized_name}</li>;
-            })}
-          </ol>
+      <main
+        className="
+          font-inter
+          flex flex-col justify-center items-center w-full
+          bg-gradient-to-tr from-black via-deg to-black"
+      >
+        <div>
+          <div className="flex flex-col justify-center items-center m-10 gap-4">
+            {/* ATTRIBUTE FILTERS */}
+
+            <div className="flex gap-6">
+              <Button
+                className={twMerge("border-str text-str", primaryAttr === PrimaryAttr.Str && "bg-str text-black")}
+                onClick={() => {
+                  handleAttr(PrimaryAttr.Str);
+                }}
+              >
+                STRENGTH
+              </Button>
+
+              <Button
+                className={twMerge("border-agi text-agi", primaryAttr === PrimaryAttr.Agi && "bg-agi text-black")}
+                onClick={() => {
+                  handleAttr(PrimaryAttr.Agi);
+                }}
+              >
+                AGILITY
+              </Button>
+
+              <Button
+                className={twMerge("border-int text-int", primaryAttr === PrimaryAttr.Int && "bg-int text-black")}
+                onClick={() => {
+                  handleAttr(PrimaryAttr.Int);
+                }}
+              >
+                INTELLIGENCE
+              </Button>
+            </div>
+
+            {/* ATTACK TYPE FILTER */}
+            <div className="flex gap-5 m-1">
+              <Button
+                className={twMerge("border-white text-white", attackType === AttackType.Melee && "bg-white text-black")}
+                onClick={() => {
+                  handleAttackType(AttackType.Melee);
+                }}
+              >
+                MELEE
+              </Button>
+
+              <Button
+                className={twMerge(
+                  "border-white text-white",
+                  attackType === AttackType.Ranged && "bg-white text-black"
+                )}
+                onClick={() => {
+                  handleAttackType(AttackType.Ranged);
+                }}
+              >
+                RANGED
+              </Button>
+            </div>
+          </div>
+
+          {/* RESULTS */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-8 lg:gap-6 text-white">
+            {heroes
+              ?.filter((value) => {
+                return (
+                  // filtro:
+                  // Se o 1º for null(true), ele pula pra segunda condição.
+                  // Se possuir um valor(false), ele filtra baseado na condição imposta.
+                  // A mesma regra repete-se para as duas linhas.
+                  (!attackType || value.attack_type === attackType) &&
+                  (!primaryAttr || value.primary_attr === primaryAttr)
+                );
+              })
+              .map((value) => {
+                return (
+                  <div key={value.id}>
+                    <Image
+                      alt={value.localized_name + " Icon"}
+                      src={"https://api.opendota.com" + value.img}
+                      width={256}
+                      height={144}
+                      className="w-32 h-24 object-cover"
+                      priority
+                    />
+                    <ul>
+                      <li>{value.localized_name}</li>
+                    </ul>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </main>
     </>
   );
 }
-
-// Listar somente os de inteligênciaa

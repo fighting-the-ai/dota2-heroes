@@ -2,8 +2,20 @@ export interface Hero {
   id: number;
   name: string;
   localized_name: string;
-  primary_attr: string;
-  attack_type: string;
+  primary_attr: PrimaryAttr;
+  attack_type: AttackType;
   roles: string[];
-  legs: number;
+  img: string;
+  icon: string;
+}
+
+export enum AttackType {
+  Melee = "Melee",
+  Ranged = "Ranged"
+}
+
+export enum PrimaryAttr {
+  Str = "str",
+  Agi = "agi",
+  Int = "int"
 }
