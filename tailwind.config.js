@@ -5,15 +5,20 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ["Inter"],
+      },
       colors: {
         "str": "#B62B24",
         "agi": "#5BEF36",
         "int": "#36ACEF",
         "deg": "#757575",
       },
-      fontFamily: {
-        inter: ["Inter"],
-      },
+      transitionDelay:{
+        "30": "30ms",
+        "50": "50ms",
+        "5s" : "5000ms"
+      }
     },
   },
   plugins: [],

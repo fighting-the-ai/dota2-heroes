@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Hero, AttackType, PrimaryAttr } from "@/types";
 import { twMerge } from "tailwind-merge";
 import { Button } from "@/components/Button";
+import { AgiIcon, IntIcon, StrIcon, MeleeIcon, RangedIcon } from "@/components/Icons";
 
 export default function Home() {
   const [heroes, setHeroes] = useState<Hero[] | null>(null);
@@ -36,10 +37,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main
-        className="
-          font-inter
-          flex flex-col justify-center items-center w-full
-          bg-gradient-to-tr from-black via-deg to-black"
+        className={twMerge(
+          "font-inter",
+          "flex flex-col justify-center items-center w-full",
+          "bg-gradient-to-tr from-black via-deg to-black",
+          primaryAttr === PrimaryAttr.Str && "bg-gradient-to-tr from-black via-red-800 to-black",
+          primaryAttr === PrimaryAttr.Agi && "bg-gradient-to-tr from-black via-green-800 to-black",
+          primaryAttr === PrimaryAttr.Int && "bg-gradient-to-tr from-black via-blue-800 to-black"
+        )}
       >
         <div>
           <div className="flex flex-col justify-center items-center m-10 gap-4">
@@ -47,29 +52,44 @@ export default function Home() {
 
             <div className="flex gap-6">
               <Button
-                className={twMerge("border-str text-str", primaryAttr === PrimaryAttr.Str && "bg-str text-black")}
+                className={twMerge(
+                  "border-str text-str hover:shadow-str",
+                  primaryAttr === PrimaryAttr.Str && "bg-str text-black hover:shadow-red-500"
+                )}
                 onClick={() => {
                   handleAttr(PrimaryAttr.Str);
                 }}
+                icon={PrimaryAttr.Str}
               >
+                <StrIcon fill={primaryAttr === PrimaryAttr.Str ? "black" : "#B62B24"} />
                 STRENGTH
               </Button>
 
               <Button
-                className={twMerge("border-agi text-agi", primaryAttr === PrimaryAttr.Agi && "bg-agi text-black")}
+                className={twMerge(
+                  "border-agi text-agi hover:shadow-agi",
+                  primaryAttr === PrimaryAttr.Agi && "bg-agi text-black hover:shadow-green-500"
+                )}
                 onClick={() => {
                   handleAttr(PrimaryAttr.Agi);
                 }}
+                icon={PrimaryAttr.Agi}
               >
+                <AgiIcon fill={primaryAttr === PrimaryAttr.Agi ? "black" : "#5BEF36"} />
                 AGILITY
               </Button>
 
               <Button
-                className={twMerge("border-int text-int", primaryAttr === PrimaryAttr.Int && "bg-int text-black")}
+                className={twMerge(
+                  "border-int text-int hover:shadow-int",
+                  primaryAttr === PrimaryAttr.Int && "bg-int text-black hover:shadow-blue-300"
+                )}
                 onClick={() => {
                   handleAttr(PrimaryAttr.Int);
                 }}
+                icon={PrimaryAttr.Int}
               >
+                <IntIcon fill={primaryAttr === PrimaryAttr.Int ? "black" : "#36ACEF"} />
                 INTELLIGENCE
               </Button>
             </div>
@@ -77,23 +97,30 @@ export default function Home() {
             {/* ATTACK TYPE FILTER */}
             <div className="flex gap-5 m-1">
               <Button
-                className={twMerge("border-white text-white", attackType === AttackType.Melee && "bg-white text-black")}
+                className={twMerge(
+                  "border-white text-white hover:shadow-white",
+                  attackType === AttackType.Melee && "bg-white text-black hover:shadow-gray-300"
+                )}
                 onClick={() => {
                   handleAttackType(AttackType.Melee);
                 }}
+                icon={AttackType.Melee}
               >
+                <MeleeIcon fill={attackType === AttackType.Melee ? "black" : "white"} />
                 MELEE
               </Button>
 
               <Button
                 className={twMerge(
-                  "border-white text-white",
-                  attackType === AttackType.Ranged && "bg-white text-black"
+                  "border-white text-white hover:shadow-white",
+                  attackType === AttackType.Ranged && "bg-white text-black hover:shadow-gray-300"
                 )}
                 onClick={() => {
                   handleAttackType(AttackType.Ranged);
                 }}
+                icon={AttackType.Ranged}
               >
+                <RangedIcon fill={attackType === AttackType.Ranged ? "black" : "white"} />
                 RANGED
               </Button>
             </div>
