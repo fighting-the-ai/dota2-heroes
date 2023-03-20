@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { Hero, AttackType, PrimaryAttr } from "@/types";
 import { twMerge } from "tailwind-merge";
-import { Button } from "@/components/Button";
 import { AgiIcon, IntIcon, StrIcon, MeleeIcon, RangedIcon } from "@/components/Icons";
+import { Button } from "@/components/Button";
+import { HeroCard } from "@/components/HeroCard";
 
 export default function Home() {
   const [heroes, setHeroes] = useState<Hero[] | null>(null);
@@ -46,10 +46,10 @@ export default function Home() {
           primaryAttr === PrimaryAttr.Int && "bg-gradient-to-tr from-black via-blue-800 to-black"
         )}
       >
+        {/* MAIN PAGE */}
         <div>
+          {/* ATTRIBUTE FILTERS */}
           <div className="flex flex-col justify-center items-center m-10 gap-4">
-            {/* ATTRIBUTE FILTERS */}
-
             <div className="flex gap-6">
               <Button
                 className={twMerge(
@@ -127,36 +127,7 @@ export default function Home() {
           </div>
 
           {/* RESULTS */}
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-8 lg:gap-6 text-white">
-            {heroes
-              ?.filter((value) => {
-                return (
-                  // filtro:
-                  // Se o 1º for null(true), ele pula pra segunda condição.
-                  // Se possuir um valor(false), ele filtra baseado na condição imposta.
-                  // A mesma regra repete-se para as duas linhas.
-                  (!attackType || value.attack_type === attackType) &&
-                  (!primaryAttr || value.primary_attr === primaryAttr)
-                );
-              })
-              .map((value) => {
-                return (
-                  <div key={value.id}>
-                    <Image
-                      alt={value.localized_name + " Icon"}
-                      src={"https://api.opendota.com" + value.img}
-                      width={256}
-                      height={144}
-                      className="w-32 h-24 object-cover"
-                      priority
-                    />
-                    <ul>
-                      <li>{value.localized_name}</li>
-                    </ul>
-                  </div>
-                );
-              })}
-          </div>
+          <HeroCard heroesInfos={heroes} attackType={attackType} primaryAttr={primaryAttr} />
         </div>
       </main>
     </>

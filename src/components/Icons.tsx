@@ -15,10 +15,10 @@ export const StrIcon = (props: IconsProps) => {
         <path
           d="M8.56461 13.5C9.10502 11.5312 10.9946 10.125 13.1711 10.3575C15.2432 10.5788 16.8905 12.3375 16.9949 14.43C17.021 14.9812 16.9464 15.51 16.7862 16.0012C16.6893 16.3012 16.3986 16.5 16.0818 16.5H4.9823C3.10096 16.5 1.68994 14.7679 2.05891 12.9116L4.32711 1.5H8.79941L10.2902 4.125L7.09621 6.42375L6.19057 5.25M7.09994 6.42375L8.79941 12.75"
           stroke="white"
-          stroke-width="2.5"
-          stroke-miterlimit="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2.5"
+          strokeMiterlimit="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </mask>
       <g mask="url(#mask0_4_89)">
@@ -51,7 +51,7 @@ export const AgiIcon = (props: IconsProps) => {
 export const IntIcon = (props: IconsProps) => {
   return (
     <svg width="16" height="16" viewBox="0 0 15 16" fill={props.fill} xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_4_92)">
+      <g clipPath="url(#clip0_4_92)">
         <path
           d="M6.44623 1.75098L5.41077 2.16406C5.32837 2.19629 5.27344 2.28125 5.27344 2.375C5.27344 2.46875 5.32837 
           2.55371 5.41077 2.58594L6.44623 2.99902L6.8335 4.10352C6.86371 4.19141 6.94336 4.25 7.03125 4.25C7.11914 4.25
