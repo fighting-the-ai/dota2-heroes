@@ -5,11 +5,13 @@ import { twMerge } from "tailwind-merge";
 import { AgiIcon, IntIcon, StrIcon, MeleeIcon, RangedIcon } from "@/components/Icons";
 import { Button } from "@/components/Button";
 import { HeroCard } from "@/components/HeroCard";
+import { Header } from "@/components/Header";
 
 export default function Home() {
   const [heroes, setHeroes] = useState<Hero[] | null>(null);
   const [primaryAttr, setPrimaryAttr] = useState<PrimaryAttr | null>(null);
   const [attackType, setAttackType] = useState<AttackType | null>(null);
+  const [heroName, setHeroName] = useState("");
 
   useEffect(() => {
     fetch("https://api.opendota.com/api/heroStats")
@@ -27,6 +29,18 @@ export default function Home() {
   function handleAttr(newAttr: PrimaryAttr) {
     setPrimaryAttr((primaryAttr) => (primaryAttr === newAttr ? null : newAttr));
   }
+
+  const searchHeroes = heroes?.filter((hero) => {
+    return (
+      // filtro:
+      // Se o 1º for true, ele pula pra segunda condição.
+      // Se possuir um valor(false), ele filtra baseado na condição imposta e passa o valor.
+      // A mesma regra repete-se para as duas linhas.
+      (!attackType || hero.attack_type === attackType) &&
+      (!primaryAttr || hero.primary_attr === primaryAttr) &&
+      (!heroName || hero.localized_name.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0)
+    );
+  });
 
   return (
     <>
@@ -46,6 +60,11 @@ export default function Home() {
           primaryAttr === PrimaryAttr.Int && "bg-gradient-to-tr from-black via-blue-800 to-black"
         )}
       >
+        <Header
+          onChange={(value) => {
+            setHeroName(value);
+          }}
+        />
         {/* MAIN PAGE */}
         <div>
           {/* ATTRIBUTE FILTERS */}
@@ -127,7 +146,12 @@ export default function Home() {
           </div>
 
           {/* RESULTS */}
-          <HeroCard heroesInfos={heroes} attackType={attackType} primaryAttr={primaryAttr} />
+          <div className="text-white mx-28 flex flex-wrap gap-7">
+            {searchHeroes?.length === 0 && <h1>No heroes found</h1>}
+            {searchHeroes?.map((hero) => {
+              return <HeroCard key={hero.id} hero={hero} />;
+            })}
+          </div>
         </div>
       </main>
     </>

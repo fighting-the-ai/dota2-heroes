@@ -9,6 +9,12 @@ const nextConfig = {
         port: '',
         pathname: '/apps/dota2/images/dota_react/heroes/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 }
