@@ -66,7 +66,7 @@ export default function Home() {
           }}
         />
         {/* MAIN PAGE */}
-        <div>
+        <div className="min-h-screen">
           {/* ATTRIBUTE FILTERS */}
           <div className="flex flex-col justify-center items-center m-10 gap-4">
             <div className="flex gap-6">
@@ -80,7 +80,7 @@ export default function Home() {
                 }}
                 icon={PrimaryAttr.Str}
               >
-                <StrIcon fill={primaryAttr === PrimaryAttr.Str ? "black" : "#B62B24"} />
+                <StrIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Str ? "black" : "#B62B24"} />
                 STRENGTH
               </Button>
 
@@ -94,7 +94,7 @@ export default function Home() {
                 }}
                 icon={PrimaryAttr.Agi}
               >
-                <AgiIcon fill={primaryAttr === PrimaryAttr.Agi ? "black" : "#5BEF36"} />
+                <AgiIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Agi ? "black" : "#5BEF36"} />
                 AGILITY
               </Button>
 
@@ -108,7 +108,7 @@ export default function Home() {
                 }}
                 icon={PrimaryAttr.Int}
               >
-                <IntIcon fill={primaryAttr === PrimaryAttr.Int ? "black" : "#36ACEF"} />
+                <IntIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Int ? "black" : "#36ACEF"} />
                 INTELLIGENCE
               </Button>
             </div>
@@ -125,7 +125,7 @@ export default function Home() {
                 }}
                 icon={AttackType.Melee}
               >
-                <MeleeIcon fill={attackType === AttackType.Melee ? "black" : "white"} />
+                <MeleeIcon width={18} height={18} fill={attackType === AttackType.Melee ? "black" : "white"} />
                 MELEE
               </Button>
 
@@ -139,15 +139,15 @@ export default function Home() {
                 }}
                 icon={AttackType.Ranged}
               >
-                <RangedIcon fill={attackType === AttackType.Ranged ? "black" : "white"} />
+                <RangedIcon width={18} height={18} fill={attackType === AttackType.Ranged ? "black" : "white"} />
                 RANGED
               </Button>
             </div>
           </div>
 
           {/* RESULTS */}
-          <div className="text-white mx-28 flex flex-wrap gap-7">
-            {searchHeroes?.length === 0 && <h1>No heroes found</h1>}
+          <div className="text-white mx-28 flex justify-center flex-wrap gap-7 mb-56">
+            {searchHeroes?.length === 0 && <h1>NO HEROES FOUNDED</h1>}
             {searchHeroes?.map((hero) => {
               return <HeroCard key={hero.id} hero={hero} />;
             })}

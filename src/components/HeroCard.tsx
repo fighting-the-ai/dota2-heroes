@@ -1,25 +1,34 @@
 import Image from "next/image";
-import { Hero } from "@/types";
+import { Hero, PrimaryAttr } from "@/types";
 import { twMerge } from "tailwind-merge";
+import { HeroHover } from "./HeroHover";
+import { useState } from "react";
 
 interface HeroCardProps {
   hero: Hero;
 }
 
 export const HeroCard = (props: HeroCardProps) => {
-  const { hero } = props
+  const [isMouseOver, setIsMouseOver] = useState(false);
+  const { hero } = props;
+
   return (
-    <div key={hero.id}>
+    <div
+      key={hero.id}
+      onMouseOver={() => setIsMouseOver(true)}
+      onMouseOut={() => setIsMouseOver(false)}
+    >
+      {isMouseOver && <HeroHover heroInfos={hero} />}
       <Image
         alt={hero.localized_name + " Icon"}
         src={"https://api.opendota.com" + hero.img}
         width={256}
         height={144}
         className={twMerge(
-          "w-40 h-28 cursor-pointer border-2 object-cover rounded-lg",
-          hero.primary_attr === "str" && "border-str",
-          hero.primary_attr === "agi" && "border-agi",
-          hero.primary_attr === "int" && "border-int"
+          "w-40 h-28 border-2 object-cover rounded-lg",
+          hero.primary_attr === PrimaryAttr.Str && "border-str",
+          hero.primary_attr === PrimaryAttr.Agi && "border-agi",
+          hero.primary_attr === PrimaryAttr.Int && "border-int"
         )}
         priority
       />

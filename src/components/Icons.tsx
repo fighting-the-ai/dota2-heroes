@@ -1,10 +1,19 @@
 interface IconsProps {
   fill: string;
+  width: number;
+  height: number;
 }
 
 export const StrIcon = (props: IconsProps) => {
   return (
-    <svg width="16" height="16" viewBox="0 0 19 18" fill="none" stroke="current" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 19 18"
+      fill="none"
+      stroke="current"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <mask id="mask0_4_89" maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="18">
         <path
           d="M8.56461 13.5C9.10502 11.5312 10.9946 10.125 13.1711 10.3575C15.2432 10.5788 16.8905 12.3375 16.9949 
@@ -30,7 +39,13 @@ export const StrIcon = (props: IconsProps) => {
 
 export const AgiIcon = (props: IconsProps) => {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill={props.fill} xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 16 16"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M8.65918 6.81641L1.17383 14.2988C0.898438 14.5742 0.898438 15.0195 1.17383 15.292C1.44922 15.5645 1.89453
             15.5674 2.16699 15.292L4.3584 13.1006C4.5752 13.2354 4.80664 13.3408 5.05566 13.4082C6.36816 13.7656 8.41016
@@ -50,7 +65,13 @@ export const AgiIcon = (props: IconsProps) => {
 
 export const IntIcon = (props: IconsProps) => {
   return (
-    <svg width="16" height="16" viewBox="0 0 15 16" fill={props.fill} xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 15 16"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g clipPath="url(#clip0_4_92)">
         <path
           d="M6.44623 1.75098L5.41077 2.16406C5.32837 2.19629 5.27344 2.28125 5.27344 2.375C5.27344 2.46875 5.32837 
@@ -84,7 +105,13 @@ export const IntIcon = (props: IconsProps) => {
 
 export const MeleeIcon = (props: IconsProps) => {
   return (
-    <svg width="15" height="16" viewBox="0 0 15 16" fill={props.fill} xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 15 16"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M3.875 2.02499L11.3125 9.46249L12.6375 8.13749L13.5187 9.01874L11.975 10.5625L13.9625 
         12.55C14.2062 12.7937 14.2062 13.1875 13.9625 13.4312L13.5187 13.875C13.4609 13.9329 13.3922 13.9789 
@@ -103,7 +130,13 @@ export const MeleeIcon = (props: IconsProps) => {
 
 export const RangedIcon = (props: IconsProps) => {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill={props.fill} xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 16 16"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M12.3938 4.26875L13 4.875L14.25 1.75L11.125 3L11.7312 3.60625L10.5938 4.74375C7.29375 
         1.85 2.5625 2.9625 2.35625 3L1.75 3.1625L2.0625 4.375L2.55625 4.25L6.825 8.5125L4.8375 10.5H3.625L1.75 
@@ -118,7 +151,7 @@ export const RangedIcon = (props: IconsProps) => {
 
 // HEADER ICONS
 interface ExtraIcons {
-  className: string,
+  className: string;
 }
 
 export const SearchIcon = () => {
