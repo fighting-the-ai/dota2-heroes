@@ -1,26 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
-import { Hero, AttackType, PrimaryAttr } from "@/types";
+import { AttackType, PrimaryAttr } from "@/types";
 import { twMerge } from "tailwind-merge";
 import { AgiIcon, IntIcon, StrIcon, MeleeIcon, RangedIcon } from "@/components/Icons";
 import { Button } from "@/components/Button";
 import { HeroCard } from "@/components/HeroCard";
 import { Header } from "@/components/Header";
+import { useHeroes } from "@/context/HeroContext";
+import { useHeroes2 } from "@/context/HeroContext2";
 
 export default function Home() {
-  const [heroes, setHeroes] = useState<Hero[] | null>(null);
   const [primaryAttr, setPrimaryAttr] = useState<PrimaryAttr | null>(null);
   const [attackType, setAttackType] = useState<AttackType | null>(null);
   const [heroName, setHeroName] = useState("");
-
-  useEffect(() => {
-    fetch("https://api.opendota.com/api/heroStats")
-      .then((res) => res.json())
-      .then((data: Hero[]) => {
-        setHeroes(data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
 
   function handleAttackType(newAttackType: AttackType) {
     setAttackType((attackType) => (attackType === newAttackType ? null : newAttackType));
@@ -30,15 +22,20 @@ export default function Home() {
     setPrimaryAttr((primaryAttr) => (primaryAttr === newAttr ? null : newAttr));
   }
 
-  const searchHeroes = heroes?.filter((hero) => {
+  const { heroes } = useHeroes();
+  const { heroes2 } = useHeroes2();
+
+  console.log(heroes2);
+  
+  const searchHeroes = heroes2 && Object.values(heroes2).filter((hero) => {
     return (
       // filtro:
       // Se o 1º for true, ele pula pra segunda condição.
       // Se possuir um valor(false), ele filtra baseado na condição imposta e passa o valor.
       // A mesma regra repete-se para as duas linhas.
-      (!attackType || hero.attack_type === attackType) &&
-      (!primaryAttr || hero.primary_attr === primaryAttr) &&
-      (!heroName || hero.localized_name.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0)
+      (!attackType || hero.stat.attackType === attackType) &&
+      (!primaryAttr || hero.stat.AttributePrimary === primaryAttr) &&
+      (!heroName || hero.displayName.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0)
     );
   });
 
@@ -54,13 +51,11 @@ export default function Home() {
         className={twMerge(
           "font-inter",
           "flex flex-col justify-center items-center w-full",
-          "bg-gradient-to-tr from-black via-deg to-black",
-          primaryAttr === PrimaryAttr.Str && "bg-gradient-to-tr from-black via-red-800 to-black",
-          primaryAttr === PrimaryAttr.Agi && "bg-gradient-to-tr from-black via-green-800 to-black",
-          primaryAttr === PrimaryAttr.Int && "bg-gradient-to-tr from-black via-blue-800 to-black"
+          "bg-gradient-to-tr from-black via-deg to-black"
         )}
       >
         <Header
+          result={searchHeroes?.length === 0 ? true : false}
           onChange={(value) => {
             setHeroName(value);
           }}
@@ -72,7 +67,7 @@ export default function Home() {
             <div className="flex gap-6">
               <Button
                 className={twMerge(
-                  "border-str text-str hover:shadow-str",
+                  "border-str font-extrabold  text-str hover:shadow-str",
                   primaryAttr === PrimaryAttr.Str && "bg-str text-black hover:shadow-red-500"
                 )}
                 onClick={() => {
@@ -86,7 +81,7 @@ export default function Home() {
 
               <Button
                 className={twMerge(
-                  "border-agi text-agi hover:shadow-agi",
+                  "border-agi font-extrabold  text-agi hover:shadow-agi",
                   primaryAttr === PrimaryAttr.Agi && "bg-agi text-black hover:shadow-green-500"
                 )}
                 onClick={() => {
@@ -100,7 +95,7 @@ export default function Home() {
 
               <Button
                 className={twMerge(
-                  "border-int text-int hover:shadow-int",
+                  "border-int font-extrabold  text-int hover:shadow-int",
                   primaryAttr === PrimaryAttr.Int && "bg-int text-black hover:shadow-blue-300"
                 )}
                 onClick={() => {
@@ -110,6 +105,37 @@ export default function Home() {
               >
                 <IntIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Int ? "black" : "#36ACEF"} />
                 INTELLIGENCE
+              </Button>
+
+              <Button
+                className={twMerge(
+                  "hover:shadow-white border-none",
+                  "bg-gradient-to-r from-str via-agi to-int",
+                )}
+                onClick={() => {
+                  handleAttr(PrimaryAttr.Uni);
+                }}
+                icon={PrimaryAttr.Uni}
+              >
+                <div
+                  className={twMerge(
+                    "w-[142px] h-[30px]",
+                    "rounded-tr-lg rounded-bl-lg rounded-tl-2xl rounded-br-2xl",
+                    primaryAttr !== PrimaryAttr.Uni && "bg-hgray"
+                  )}
+                >
+                  <div className="flex w-full h-full justify-center items-center gap-1">
+                    {/* <IntIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Uni ? "black" : "#36ACEF"} /> */}
+                    <h1
+                      className={twMerge(
+                        "font-extrabold text-transparent bg-clip-text bg-gradient-to-r",
+                        primaryAttr === PrimaryAttr.Uni && "text-black"
+                      )}
+                    >
+                      UNIVERSAL
+                    </h1>
+                  </div>
+                </div>
               </Button>
             </div>
 

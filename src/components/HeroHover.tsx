@@ -1,5 +1,6 @@
 import { Hero, PrimaryAttr } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 import { AgiIcon, IntIcon, StrIcon } from "./Icons";
 
@@ -39,7 +40,10 @@ export const HeroHover = (props: HeroInfoProps) => {
   };
 
   return (
-    <div className="relative">
+    <Link
+      href={`/${heroInfos.localized_name}`}
+      className="relative"
+    >
       <div
         className={twMerge(
           "max-h-max w-fit text-xs cursor-pointer",
@@ -159,6 +163,6 @@ export const HeroHover = (props: HeroInfoProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

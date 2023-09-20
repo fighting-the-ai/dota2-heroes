@@ -1,10 +1,16 @@
-interface IconsProps {
+interface AttrIconsProps {
   fill: string;
   width: number;
   height: number;
 }
 
-export const StrIcon = (props: IconsProps) => {
+interface ExtraIcons {
+  className: string;
+  fill: string;
+  stroke: string;
+}
+
+export const StrIcon = (props: AttrIconsProps) => {
   return (
     <svg
       width={props.width}
@@ -37,7 +43,7 @@ export const StrIcon = (props: IconsProps) => {
   );
 };
 
-export const AgiIcon = (props: IconsProps) => {
+export const AgiIcon = (props: AttrIconsProps) => {
   return (
     <svg
       width={props.width}
@@ -63,7 +69,7 @@ export const AgiIcon = (props: IconsProps) => {
   );
 };
 
-export const IntIcon = (props: IconsProps) => {
+export const IntIcon = (props: AttrIconsProps) => {
   return (
     <svg
       width={props.width}
@@ -103,7 +109,7 @@ export const IntIcon = (props: IconsProps) => {
   );
 };
 
-export const MeleeIcon = (props: IconsProps) => {
+export const MeleeIcon = (props: AttrIconsProps) => {
   return (
     <svg
       width={props.width}
@@ -128,7 +134,7 @@ export const MeleeIcon = (props: IconsProps) => {
   );
 };
 
-export const RangedIcon = (props: IconsProps) => {
+export const RangedIcon = (props: AttrIconsProps) => {
   return (
     <svg
       width={props.width}
@@ -149,25 +155,261 @@ export const RangedIcon = (props: IconsProps) => {
   );
 };
 
-// HEADER ICONS
-interface ExtraIcons {
-  className: string;
-}
-
-export const SearchIcon = () => {
+export const DamageIcon = (props: AttrIconsProps) => {
   return (
-    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      fill={props.fill}
+      height={props.height}
+      width={props.width}
+      version="1.1"
+      id="Capa_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 454.635 454.635"
+      xmlSpace="preserve"
+      transform="rotate(45)"
+      stroke="#000000"
+      strokeWidth="0"
+    >
+      <path
+        d="M286.306,301.929h-17.472L295.141,82.85c0.708-5.89-1.709-13.694-5.621-18.155L236.506,4.255
+        C234.134,1.551,230.785,0,227.317,0s-6.816,1.551-9.188,4.255l-53.015,60.439c-3.912,4.461-6.328,12.266-5.621,18.155
+        l26.307,219.079h-17.472c-8.412,0-15.256,6.844-15.256,15.256v18.984c0,8.412,6.844,15.256,15.256,15.256h37.118v33.143
+        c-10.014,6.95-16.588,18.523-16.588,31.609c0,21.206,17.252,38.458,38.458,38.458s38.458-17.252,38.458-38.458
+        c0-13.086-6.574-24.659-16.588-31.609v-33.143h37.118c8.412,0,15.256-6.844,15.256-15.256v-18.984
+        C301.562,308.772,294.718,301.929,286.306,301.929z"
+      ></path>
+    </svg>
+  );
+};
+
+export const AttackTimeIcon = (props: AttrIconsProps) => {
+  return (
+    <svg
+      fill={props.fill}
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 1920 1920"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M960 112.941c-467.125 0-847.059 379.934-847.059 847.059 0 467.125 379.934 847.059 847.059 847.059 467.125
+          0 847.059-379.934 847.059-847.059 0-467.125-379.934-847.059-847.059-847.059M960 1920C430.645 1920 0 1489.355
+          0 960S430.645 0 960 0s960 430.645 960 960-430.645 960-960 960m417.905-575.955L903.552
+          988.28V395.34h112.941v536.47l429.177 321.77-67.765 90.465Z"
+        fillRule="evenodd"
+      ></path>
+    </svg>
+  );
+};
+
+export const AttackRangeIcon = (props: AttrIconsProps) => {
+  return (
+    <svg
+      fill={props.fill}
+      height={props.height}
+      width={props.width}
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 512.04 512.04"
+      xmlSpace="preserve"
+    >
+      <path
+        d="M508.933,248.353L402.267,141.687c-4.267-4.053-10.987-3.947-15.04,0.213c-3.947,4.16-3.947,10.667,0,14.827
+            l88.427,88.427H36.4l88.427-88.427c4.053-4.267,3.947-10.987-0.213-15.04c-4.16-3.947-10.667-3.947-14.827,0L3.12,248.353
+            c-4.16,4.16-4.16,10.88,0,15.04L109.787,370.06c4.267,4.053,10.987,3.947,15.04-0.213c3.947-4.16,3.947-10.667,0-14.827
+            L36.4,266.593h439.147L387.12,355.02c-4.267,4.053-4.373,10.88-0.213,15.04c4.053,4.267,10.88,4.373,15.04,0.213
+            c0.107-0.107,0.213-0.213,0.213-0.213l106.667-106.667C513.093,259.34,513.093,252.513,508.933,248.353z"
+      ></path>
+    </svg>
+  );
+};
+
+export const ArmorIcon = (props: AttrIconsProps) => {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={props.width}
+      height={props.height}
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 22c-1.148 0-3.418-1.362-5.13-3.34C4.44 15.854 3 11.967 3 7a1 1 0 0 1 .629-.929c3.274-1.31 5.88-2.613
+        7.816-3.903a1 1 0 0 1 1.11 0c1.935 1.29 4.543 2.594 7.816 3.903A1 1 0 0 1 21 7c0 4.968-1.44 8.855-3.87
+        11.66C15.419 20.637 13.149 22 12 22z"
+      ></path>
+    </svg>
+  );
+};
+
+export const MagicArmorIcon = (props: AttrIconsProps) => {
+  return (
+    <svg
+      viewBox="0 0 192 192"
+      xmlns="http://www.w3.org/2000/svg"
+      enableBackground="new 0 0 192 192"
+      xmlSpace="preserve"
+      fill={props.fill}
+      width={props.width}
+      height={props.height}
+    >
+      <path
+        d="M25.7 22h140.6v64.9c-.2 7.7-1.7 29.8-17.7 50.8-18.2 23.7-43 30.3-51.3 32.1-.8.2-1.6.2-2.4 
+          0-8.1-1.6-31.3-7.5-49.3-29.2-18.7-22.3-19.8-46.8-19.9-53.7V22z"
+        fill="none"
+        stroke={props.fill}
+        strokeWidth="12"
+        strokeLinejoin="round"
+        strokeMiterlimit="10"
+      ></path>
+      <path
+        d="M75.5 131c-.7 0-1.4.4-1.9 1.1-.8 1.1-.6 2.8.6 3.6 3.7 2.7 8.2 4.4 13.6 5.1 2.5.3 5 .3 7.5 0 2.4-.3 
+        5-.9 7.3-1.7 4.7-1.6 9.2-4.4 12.6-8 3.7-3.8 6.2-8.1 7.3-12.5.2-.8.1-1.4-.4-1.9-.9-1.1-2.2-1.2-3.2-.4l-.1.1c-3.8
+        3.1-6.8 5.4-9.8 7.2-1.9 1.2-3.6 2-5 2.7-1.4.8-3.1 1.4-5.1 2.1-1.3.6-2.8.9-4.2
+        1.3-.4.1-.7.2-1.1.3-1.9.4-3.8.7-5.6.9-3.3.4-7 .5-12 .3h-.4c.1-.2 0-.2-.1-.2zM54.8 83.5c-.4
+        0-.8.1-1.1.3-.7.3-1.2.9-1.3 1.5-1.4 4.3-1.6 9.3-.6 14.6.5 2.4 1.3 4.8 2.3 7.1 1.1 2 2.3 4.3 4 6.5 3 4 7 7.2
+        11.6 9.5 4.9 2.4 9.6 3.5 14.2 3.1.7-.1
+        1.3-.5 1.7-1.1.4-.5.5-1.1.4-1.7-.1-.6-.5-1.1-1-1.3l-.1-.1c-3.5-2.3-6.8-4.5-9.9-7.1-1.4-1.3-2.9-2.5-4.1-3.9-1.3-1.3-2.5-2.8-3.7-4.2-1-1.3-1.8-2.6-2.6-4-.2-.3-.3-.5-.5-.8-1.1-1.7-1.9-3.4-2.6-5-1.7-3.7-2.9-7.5-4-11.3l-.3-.3c-.2-.9-.8-1.4-1.6-1.7-.3-.1-.6-.1-.8-.1zM93.4
+        49c-4.7 0-9.5 1.3-14 4-2.5 1.4-4.4 2.9-6.1 4.4-2 1.9-3.6 3.7-4.9 5.7-2.8 4.1-4.7 8.9-5.5 13.9-.7 5.2-.2
+        10.1 1.5 14.4.2.7.8 1.2 1.5 1.3 1.2.3 2.4-.5 2.8-1.6V91c1.2-4.7 2.4-8.4 3.7-11.6.8-1.8 1.6-3.8 2.4-5.1.8-1.5
+        1.7-3.1 2.9-4.7.7-1.2 1.5-2.1 2.4-3.2.3-.4.7-.8 1-1.3 1.1-1.3 2.4-2.7 4-4 2.9-2.7 6.3-5.1 9.5-7.2l.2-.1c.7-.5
+        1.1-1.3 1.1-2.1.1-1.4-1-2.7-2.5-2.7zm47.3 28c-1.4-4.4-4.2-8.7-8.1-12.1-2.1-1.9-4.1-3.4-6.1-4.4-2.4-1.3-4.6-2.2-6.9-2.9-4.7-1.3-9.9-1.7-14.9-.9-5.1
+        1-9.7 3-13.2 5.9-.6.4-.9 1.2-.8 1.8.1 1.3 1.2 2.1 2.4 2.1h.1c4.8-.3 8.7-.4 12.1-.1 2 .1 4 .5 5.6.7 1.7.3 3.5.7
+        5.4 1.3 1.3.3 2.5.8 3.8 1.3.5.2 1 .4 1.4.6 1.5.7 3.3 1.4 5.1 2.5 3.5 1.9 6.7 4.4 9.8 6.8l.2.2c.7.5 1.5.7 2.3.4
+        1.5-.4 2.3-2 1.8-3.2zm-16.6 5c1.6 4 2.9 7.8 3.9 11.6.5 1.9.8 3.8 1.1 5.6.3 1.8.4 3.7.5 5.5.1 1.4 0 2.9-.1 4.2 0
+        .5-.1.9-.1 1.3-.2 1.9-.5 3.9-.9 5.6-.8 4-2.1 7.9-3.5 11.5l-.1.2c-.3.9-.2 1.6.4 2.4.9 1.2 2.4 1.3 3.6.6 3.9-2.7
+        6.8-6.6 9.1-11.4 1.1-2.2 1.8-4.5 2.3-7.1.6-2.7.8-5.2.7-7.5-.1-5-1.3-10-3.8-14.5-2.4-4.6-5.8-8.3-9.7-10.7-.7-.4-1.3-.5-2-.3-.6.2-1
+        .7-1.3 1.2-.3.5-.4 1.1-.1 1.8z"
+      ></path>
+    </svg>
+  );
+};
+
+export const SpeedIcon = (props: AttrIconsProps) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={props.width}
+      height={props.height}
+      fill={props.fill}
+      viewBox="0 0 512 512"
+    >
+      <g transform="translate(0, 512) scale(0.1,-0.1)">
+        <path
+          d="M4342 5101 c-109 -38 -161 -101 -216 -266 -88 -261 -214 -438 -366
+            -515 -59 -30 -87 -36 -308 -69 -212 -32 -408 -105 -602 -225 -145 -90 -173
+            -69 -264 196 -36 103 -74 204 -85 225 -25 49 -84 105 -141 134 -64 32 -178 38
+            -245 12 -27 -11 -324 -147 -659 -304 -435 -203 -620 -294 -650 -320 -65 -57
+            -99 -129 -104 -219 -4 -80 7 -127 70 -278 31 -76 60 -102 111 -102 13 0 163
+            62 332 137 328 145 357 153 422 120 96 -50 111 -205 24 -266 -14 -11 -163 -80
+            -330 -154 -166 -74 -314 -143 -327 -153 -44 -34 -46 -71 -9 -179 46 -130 63
+            -157 111 -174 l40 -14 307 137 c336 149 367 157 435 116 92 -56 98 -206 9
+            -264 -13 -9 -160 -76 -328 -151 -199 -88 -312 -144 -326 -160 -26 -30 -28 -55
+            -11 -137 21 -100 14 -112 -285 -561 l-271 -409 -226 -113 c-312 -157 -406
+            -222 -440 -305 -17 -42 1 -101 38 -126 25 -18 57 -19 582 -19 305 0 572 4 594
+            8 26 6 320 196 920 596 484 323 890 591 901 595 11 5 89 8 172 7 167 -2 237 7
+            357 45 167 53 299 136 422 266 105 111 149 143 403 298 269 165 353 228 446
+            337 280 326 348 775 178 1172 -35 82 -36 85 -25 150 31 177 23 288 -29 446
+            -55 165 -158 307 -299 414 -120 90 -215 111 -328 72z m191 -573 c22 -17 44
+            -84 53 -156 11 -105 -29 -235 -99 -317 -53 -62 -70 -103 -70 -166 0 -101 69
+            -185 173 -208 29 -6 55 -21 73 -41 23 -26 27 -39 27 -88 -1 -207 -134 -437
+            -330 -566 -41 -27 -65 -36 -97 -36 -55 0 -84 27 -118 109 -92 222 -287 394
+            -507 446 -216 51 -515 -24 -591 -147 -55 -89 -45 -191 27 -263 72 -72 150 -82
+            259 -33 132 57 233 46 326 -38 166 -149 159 -403 -15 -564 -81 -74 -253 -140
+            -369 -140 -110 0 -262 55 -345 124 -107 90 -207 255 -235 391 -54 258 28 500
+            239 710 177 176 378 268 640 295 384 39 683 245 847 586 56 115 73 131 112
+            102z"
+        />
+        <path
+          d="M2413 1094 c-531 -356 -987 -656 -1012 -667 -116 -51 -107 -51 -731
+            -54 -367 -2 -595 -7 -611 -14 -86 -34 -74 -186 22 -280 83 -80 69 -79 713 -79
+            605 0 633 2 737 55 102 51 1916 1202 1954 1240 66 65 89 125 90 225 0 73 -4
+            92 -28 137 -31 60 -66 83 -127 83 -38 0 -121 -54 -1007 -646z"
+        />
+      </g>
+    </svg>
+  );
+};
+
+export const RotateIcon = (props: AttrIconsProps) => {
+  return (
+    <svg
+      fill={props.fill}
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 32 32"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M30.537 20.871c-0.157-0.076-0.341-0.12-0.535-0.12-0.495 0-0.924 0.287-1.128 0.704l-0.003 0.007c-2.094
+        4.345-6.464 7.289-11.522 7.289-7.042 0-12.751-5.709-12.751-12.751s5.708-12.751 12.75-12.751h0c0.009-0 0.019-0
+        0.029-0 3.771 0 7.155 1.653 9.468 4.274l0.012 0.014h-4.582c-0.69 0-1.25 0.56-1.25 1.25s0.56 1.25 1.25
+        1.25v0h7.072c0.030 0 0.055-0.015 0.084-0.017 0.179-0.023 0.341-0.070 0.491-0.138l-0.011 0.004c0.026-0.013
+        0.055-0.013 0.080-0.029 0.038-0.031 0.072-0.062 0.105-0.096l0-0c0.071-0.053 0.134-0.11
+        0.19-0.174l0.001-0.001c0.093-0.117 0.171-0.252 0.227-0.397l0.003-0.010c0.024-0.073 0.042-0.158
+        0.050-0.246l0-0.005c0.011-0.038 0.021-0.086 0.028-0.135l0.001-0.006v-7.071c0-0.69-0.56-1.25-1.25-1.25s-1.25
+        0.56-1.25 1.25v0 3.472c-2.736-2.742-6.519-4.439-10.698-4.439-0.018 0-0.036 0-0.054 0h0.003c-8.421 0.002-15.247
+        6.829-15.247 15.25 0 8.422 6.828 15.25 15.25 15.25 6.047 0 11.272-3.52 13.738-8.622l0.040-0.091c0.077-0.157
+        0.122-0.342 0.122-0.538 0-0.495-0.288-0.923-0.706-1.125l-0.007-0.003z"
+      ></path>
+    </svg>
+  );
+};
+
+export const VisionIcon = (props: AttrIconsProps) => {
+  return (
+    <svg
+      fill={props.fill}
+      width={props.width}
+      height={props.height}
+      viewBox="0 0 32 32"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0 16q0.064 0.128 0.16 0.352t0.48 0.928 0.832 1.344 1.248 1.536 1.664 1.696 2.144 1.568 2.624 1.344 3.136
+      0.896 3.712 0.352 3.712-0.352 3.168-0.928 2.592-1.312 2.144-1.6 1.664-1.632 1.248-1.6 0.832-1.312
+      0.48-0.928l0.16-0.352q-0.032-0.128-0.16-0.352t-0.48-0.896-0.832-1.344-1.248-1.568-1.664-1.664-2.144-1.568-2.624-1.344-3.136-0.896-3.712-0.352-3.712
+      0.352-3.168 0.896-2.592 1.344-2.144 1.568-1.664 1.664-1.248 1.568-0.832 1.344-0.48 0.928zM10.016 16q0-2.464
+      1.728-4.224t4.256-1.76 4.256 1.76 1.76 4.224-1.76 4.256-4.256 1.76-4.256-1.76-1.728-4.256zM12 16q0 1.664
+      1.184 2.848t2.816 1.152 2.816-1.152 1.184-2.848-1.184-2.816-2.816-1.184-2.816 1.184l2.816 2.816h-4z"
+      ></path>
+    </svg>
+  );
+};
+
+export const RoleIcon = (props: AttrIconsProps) => {
+  return (
+    <svg width={props.width} height={props.height} fill={props.fill}>
+      <rect width={props.width} height={props.height} stroke="#CBD7E1" strokeWidth={2} fillOpacity={0.6} />
+    </svg>
+  );
+};
+
+// HEADER ICONS
+export const SearchIcon = (props: ExtraIcons) => {
+  return (
+    <svg
+      className={props.className}
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M15.5833 26.9167C21.8426 26.9167 26.9167 21.8426 26.9167 15.5833C26.9167 9.32411 21.8426 4.25 15.5833 
         4.25C9.32411 4.25 4.25 9.32411 4.25 15.5833C4.25 21.8426 9.32411 26.9167 15.5833 26.9167Z"
-        stroke="#D3D3D3"
+        stroke={props.stroke}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M29.75 29.75L23.5875 23.5875"
-        stroke="#D3D3D3"
+        stroke={props.stroke}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -178,11 +420,18 @@ export const SearchIcon = () => {
 
 export const UserIcon = (props: ExtraIcons) => {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={props.className}
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M26.6666 28V25.3333C26.6666 23.9188 26.1047 22.5623 25.1045 21.5621C24.1044 20.5619 22.7478 20 21.3333 
     20H10.6666C9.25216 20 7.8956 20.5619 6.89541 21.5621C5.89522 22.5623 5.33331 23.9188 5.33331 25.3333V28"
-        stroke="#D3D3D3"
+        stroke={props.stroke}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -190,7 +439,7 @@ export const UserIcon = (props: ExtraIcons) => {
       <path
         d="M16 14.6667C18.9455 14.6667 21.3334 12.2789 21.3334 9.33333C21.3334 6.38781 18.9455 4 16 4C13.0545 4 10.6667 
     6.38781 10.6667 9.33333C10.6667 12.2789 13.0545 14.6667 16 14.6667Z"
-        stroke="#D3D3D3"
+        stroke={props.stroke}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -201,17 +450,31 @@ export const UserIcon = (props: ExtraIcons) => {
 
 export const MenuIcon = (props: ExtraIcons) => {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M4 16H28" stroke="#D3D3D3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M4 8H28" stroke="#D3D3D3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M4 24H28" stroke="#D3D3D3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg
+      className={props.className}
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M4 16H28" stroke={props.stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 8H28" stroke={props.stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 24H28" stroke={props.stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 };
 
 export const PatchIcon = (props: ExtraIcons) => {
   return (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={props.className}
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
+      fill={props.fill}
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M23.5714 6.16071V21.9643C23.5712 22.0981 23.6211 22.2273 23.7113 22.3262C23.8014 22.4251 23.9254 22.4867 
         24.0587 22.4988C24.1921 22.5109 24.3251 22.4726 24.4316 22.3915C24.5381 22.3105 24.6104 22.1924 24.6343 
@@ -244,7 +507,6 @@ export const PatchIcon = (props: ExtraIcons) => {
         10.7111H19.0179L19.1271 10.7036C19.3195 10.6771 19.4957 10.5819 19.6233 10.4356C19.7509 10.2892 19.8212 10.1016 
         19.8212 9.90749C19.8212 9.71334 19.7509 9.52576 19.6233 9.37942C19.4957 9.23308 19.3195 9.13788 19.1271 
         9.11142L19.0179 9.10392Z"
-        fill="#D3D3D3"
       />
     </svg>
   );

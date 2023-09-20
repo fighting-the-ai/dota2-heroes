@@ -19,7 +19,7 @@ module.exports = {
         "30": "30ms",
         "50": "50ms",
         "5s" : "5000ms"
-      }
+      },
     },
   },
   plugins: [],

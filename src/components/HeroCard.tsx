@@ -28,7 +28,8 @@ export const HeroCard = (props: HeroCardProps) => {
           "w-40 h-28 border-2 object-cover rounded-lg",
           hero.primary_attr === PrimaryAttr.Str && "border-str",
           hero.primary_attr === PrimaryAttr.Agi && "border-agi",
-          hero.primary_attr === PrimaryAttr.Int && "border-int"
+          hero.primary_attr === PrimaryAttr.Int && "border-int",
+          hero.primary_attr === PrimaryAttr.Uni && "border-l-str border-y-agi border-r-int"
         )}
         priority
       />

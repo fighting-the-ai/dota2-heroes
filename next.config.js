@@ -11,6 +11,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cdn.stratz.com',
+        port: '',
+        pathname: '/images/dota2/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'i.imgur.com',
         port: '',
         pathname: '/**',
