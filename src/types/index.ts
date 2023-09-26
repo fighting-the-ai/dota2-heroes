@@ -90,3 +90,9 @@ export enum RoleIds {
   Support = 7,
   Pusher = 8,
 }
+
+export enum CheckData {
+  null = 0,
+  undefined = 1,
+  readed = 2
+}

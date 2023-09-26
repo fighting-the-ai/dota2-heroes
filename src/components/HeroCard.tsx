@@ -9,7 +9,7 @@ interface HeroCardProps {
 }
 
 export const HeroCard = (props: HeroCardProps) => {
-  const [isMouseOver, setIsMouseOver] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
   const { hero } = props;
 
   return (

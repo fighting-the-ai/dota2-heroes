@@ -28,10 +28,7 @@ export default function Home() {
     heroes &&
     Object.values(heroes)
       .filter((hero) => {
-        return hero.shortName !== "base";
-      })
-      .filter((hero) => {
-        return hero.shortName !== "target_dummy";
+        return hero.abilities;
       })
       .filter((hero) => {
         return (

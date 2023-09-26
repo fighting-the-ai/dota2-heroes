@@ -10,7 +10,7 @@ interface HeaderInfos {
 }
 
 export const Header = (props: HeaderInfos) => {
-  const [searching, setSearching] = useState(false);
+  const [searching, setSearching] = useState<boolean>(false);
   function searchIconColor() {
     if (props.result) {
       return "#EC4899";

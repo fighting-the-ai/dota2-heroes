@@ -12,40 +12,33 @@ interface HeroRoleProps {
 }
 
 export default function HeroRoles(props: HeroRoleProps) {
-  const [carry, setCarry] = useState(0);
-  const [sup, setSup] = useState(0);
-  const [nuker, setNuker] = useState(0);
-  const [disabler, setDisabler] = useState(0);
-  const [tank, setTank] = useState(0);
-  const [escape, setEscape] = useState(0);
-  const [push, setPush] = useState(0);
-  const [init, setInit] = useState(0);
+  const [carry, setCarry] = useState<number>(0);
+  const [sup, setSup] = useState<number>(0);
+  const [nuker, setNuker] = useState<number>(0);
+  const [disabler, setDisabler] = useState<number>(0);
+  const [tank, setTank] = useState<number>(0);
+  const [escape, setEscape] = useState<number>(0);
+  const [push, setPush] = useState<number>(0);
+  const [init, setInit] = useState<number>(0);
 
   useEffect(() => {
     for (let index = 0; index < props.roles.length; index++) {
       const element = props.roles[index];
       if (element.roleId === RoleIds.Carry) {
         setCarry(element.level);
-      }
-      if (element.roleId === RoleIds.Support) {
+      } else if (element.roleId === RoleIds.Support) {
         setSup(element.level);
-      }
-      if (element.roleId === RoleIds.Nuker) {
+      } else if (element.roleId === RoleIds.Nuker) {
         setNuker(element.level);
-      }
-      if (element.roleId === RoleIds.Disabler) {
+      } else if (element.roleId === RoleIds.Disabler) {
         setDisabler(element.level);
-      }
-      if (element.roleId === RoleIds.Durable) {
+      } else if (element.roleId === RoleIds.Durable) {
         setTank(element.level);
-      }
-      if (element.roleId === RoleIds.Escape) {
+      } else if (element.roleId === RoleIds.Escape) {
         setEscape(element.level);
-      }
-      if (element.roleId === RoleIds.Pusher) {
+      } else if (element.roleId === RoleIds.Pusher) {
         setPush(element.level);
-      }
-      if (element.roleId === RoleIds.Initiator) {
+      } else if (element.roleId === RoleIds.Initiator) {
         setInit(element.level);
       }
     }
