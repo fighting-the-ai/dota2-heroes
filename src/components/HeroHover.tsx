@@ -5,59 +5,51 @@ import { twMerge } from "tailwind-merge";
 import { AgiIcon, IntIcon, StrIcon } from "./Icons";
 
 interface HeroInfoProps {
-  heroInfos: Hero;
+  heroHoverInfos: Hero;
 }
 
 export const HeroHover = (props: HeroInfoProps) => {
-  const { heroInfos } = props;
-  const armor = (heroInfos.base_agi * 0.165 + heroInfos.base_armor).toFixed(1);
-  const manaRegen = Math.trunc(heroInfos.base_int * 0.05 * Math.pow(10, 1)) / Math.pow(10, 1);
+  const { heroHoverInfos } = props;
+  const uniAttrValue =
+    heroHoverInfos.stat.strengthBase + heroHoverInfos.stat.agilityBase + heroHoverInfos.stat.intelligenceBase;
+  const uniAttGain =
+    heroHoverInfos.stat.strengthGain + heroHoverInfos.stat.agilityGain + heroHoverInfos.stat.intelligenceGain;
 
-  const attrBonus = (props: number) => {
-    return <span>+{props} Damage (Primary Attribute Bonus)</span>;
+  const attrDamageBonus = (props: number) => {
+    return <span>+{props.toFixed(0)} Damage (Primary Attribute Bonus)</span>;
   };
 
   const damageCalc = () => {
-    if (heroInfos.primary_attr === PrimaryAttr.Str) {
-      return (
-        <p>
-          {heroInfos.base_attack_min + heroInfos.base_str} - {heroInfos.base_attack_max + heroInfos.base_str}
-        </p>
-      );
-    } else if (heroInfos.primary_attr === PrimaryAttr.Agi) {
-      return (
-        <p>
-          {heroInfos.base_attack_min + heroInfos.base_agi} - {heroInfos.base_attack_max + heroInfos.base_agi}
-        </p>
-      );
-    } else if (heroInfos.primary_attr === PrimaryAttr.Int) {
-      return (
-        <p>
-          {heroInfos.base_attack_min + heroInfos.base_int} - {heroInfos.base_attack_max + heroInfos.base_int}
-        </p>
-      );
-    }
+    return heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Uni ? (
+      <p>
+        {(heroHoverInfos.stat.startingDamageMin + uniAttrValue * 0.7).toFixed(0)}
+        {" - "}
+        {(heroHoverInfos.stat.startingDamageMax + uniAttrValue * 0.7).toFixed(0)}
+      </p>
+    ) : (
+      <p>
+        {heroHoverInfos.stat.startingDamageMin} - {heroHoverInfos.stat.startingDamageMax}
+      </p>
+    );
   };
 
   return (
-    <Link
-      href={`/${heroInfos.localized_name}`}
-      className="relative"
-    >
+    <Link href={`/${heroHoverInfos.displayName}`} className="relative">
       <div
         className={twMerge(
           "max-h-max w-fit text-xs cursor-pointer",
           "absolute -left-20 -top-20",
           "border-2 rounded-lg bg-hgray",
-          heroInfos.primary_attr === PrimaryAttr.Str && "border-str",
-          heroInfos.primary_attr === PrimaryAttr.Agi && "border-agi",
-          heroInfos.primary_attr === PrimaryAttr.Int && "border-int"
+          heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Str && "border-str",
+          heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Agi && "border-agi",
+          heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Int && "border-int",
+          heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Uni && "border-uni"
         )}
       >
         <div className="p-1">
           <Image
-            alt={heroInfos.localized_name + " Icon"}
-            src={"https://api.opendota.com" + heroInfos.img}
+            alt={heroHoverInfos.displayName + " Image"}
+            src={"https://cdn.stratz.com/images/dota2/heroes/" + heroHoverInfos.shortName + "_horz.png"}
             width={274}
             height={144}
             className="w-full border-2 border-black rounded-lg shadow-lg"
@@ -77,10 +69,8 @@ export const HeroHover = (props: HeroInfoProps) => {
               </div>
               <div className="flex flex-col">
                 {damageCalc()}
-                <p>
-                  {heroInfos.base_attack_time + heroInfos.base_agi} ({heroInfos.attack_rate + "s"})
-                </p>
-                <p>{heroInfos.attack_range}</p>
+                <p>{heroHoverInfos.stat.attackRate.toFixed(1) + "s"}</p>
+                <p>{heroHoverInfos.stat.attackRange}</p>
               </div>
             </div>
           </div>
@@ -94,9 +84,9 @@ export const HeroHover = (props: HeroInfoProps) => {
                 <p>Move Speed:</p>
               </div>
               <div className="flex flex-col">
-                <p>{armor}</p>
-                <p>{heroInfos.base_mr}%</p>
-                <p>{heroInfos.move_speed}</p>
+                <p>{heroHoverInfos.stat.startingArmor.toFixed(1)}</p>
+                <p>{heroHoverInfos.stat.startingMagicArmor}%</p>
+                <p>{heroHoverInfos.stat.moveSpeed}</p>
               </div>
             </div>
           </div>
@@ -107,18 +97,20 @@ export const HeroHover = (props: HeroInfoProps) => {
           <div
             className={twMerge(
               "flex align-middle items-center gap-1 p-1",
-              heroInfos.primary_attr === "str" && "bg-gradient-to-r from-black via-red-800"
+              heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Str && "bg-gradient-to-r from-black via-red-800"
             )}
           >
             <StrIcon width={30} height={30} fill="#B62B24" />
             <div className="flex flex-col text-slate-300">
               <span>
-                <span className="text-white font-bold">{heroInfos.base_str}</span> (Gains {heroInfos.str_gain} per
-                level)
+                <span className="text-white font-bold">{heroHoverInfos.stat.strengthBase}</span> (Gains{" "}
+                {heroHoverInfos.stat.strengthGain.toFixed(1)} per level)
               </span>
-              {heroInfos.primary_attr === PrimaryAttr.Str && attrBonus(heroInfos.base_str)}
+              {heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Str &&
+                attrDamageBonus(heroHoverInfos.stat.strengthBase)}
               <span>
-                = {heroInfos.base_str * 20} HP and {heroInfos.base_str / 10} HP Regen
+                = {120 + 22 * heroHoverInfos.stat.strengthBase} HP and{" "}
+                {(0.1 * heroHoverInfos.stat.strengthBase).toFixed(1)} HP Regen
               </span>
             </div>
           </div>
@@ -126,18 +118,20 @@ export const HeroHover = (props: HeroInfoProps) => {
           <div
             className={twMerge(
               "p-1 flex align-middle items-center gap-1",
-              heroInfos.primary_attr === "agi" && "bg-gradient-to-r from-black via-green-800"
+              heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Agi && "bg-gradient-to-r from-black via-green-800"
             )}
           >
             <AgiIcon width={30} height={30} fill="#5BEF36" />
             <div className="flex flex-col text-slate-300">
               <span>
-                <span className="text-white font-bold">{heroInfos.base_agi}</span> (Gains {heroInfos.agi_gain} per
-                level)
+                <span className="text-white font-bold">{heroHoverInfos.stat.agilityBase}</span> (Gains{" "}
+                {heroHoverInfos.stat.agilityGain.toFixed(1)} per level)
               </span>
-              {heroInfos.primary_attr === PrimaryAttr.Agi && attrBonus(heroInfos.base_agi)}
+              {heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Agi &&
+                attrDamageBonus(heroHoverInfos.stat.agilityBase)}
               <span>
-                = {(heroInfos.base_agi * 0.165).toFixed(1)} Armor and {heroInfos.base_agi} Attack Speed
+                = +{(heroHoverInfos.stat.agilityBase * 0.165).toFixed(1)} Armor and {heroHoverInfos.stat.agilityBase}{" "}
+                Attack Speed
               </span>
             </div>
           </div>
@@ -146,21 +140,47 @@ export const HeroHover = (props: HeroInfoProps) => {
             className={twMerge(
               "p-1 flex align-middle items-center gap-1",
               "rounded-bl-md rounded-br-md",
-              heroInfos.primary_attr === "int" && "bg-gradient-to-r from-black via-blue-800"
+              heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Int && "bg-gradient-to-r from-black via-blue-800"
             )}
           >
             <IntIcon width={30} height={30} fill="#36ACEF" />
             <div className="flex flex-col text-slate-300">
               <span>
-                <span className="text-white font-bold">{heroInfos.base_int}</span> (Gains {heroInfos.int_gain} per
-                level)
+                <span className="text-white font-bold">{heroHoverInfos.stat.intelligenceBase}</span> (Gains{" "}
+                {heroHoverInfos.stat.intelligenceGain.toFixed(1)} per level)
               </span>
-              {heroInfos.primary_attr === PrimaryAttr.Int && attrBonus(heroInfos.base_int)}
+              {heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Int &&
+                attrDamageBonus(heroHoverInfos.stat.intelligenceBase)}
               <span>
-                = {heroInfos.base_int * 12} Mana and {manaRegen} Mana Regen
+                = {75 + 12 * heroHoverInfos.stat.intelligenceBase} Mana and{" "}
+                {(heroHoverInfos.stat.mpRegen + 0.05 * heroHoverInfos.stat.intelligenceBase).toFixed(1)} Mana Regen
               </span>
             </div>
           </div>
+
+          {heroHoverInfos.stat.AttributePrimary === PrimaryAttr.Uni && (
+            <div
+              className={twMerge(
+                "p-1 flex align-middle items-center gap-1",
+                "rounded-bl-md rounded-br-md",
+                "bg-gradient-to-r from-black via-yellow-600"
+              )}
+            >
+              <Image
+                className="m-0"
+                alt={"Universal Image"}
+                src={"https://cdn.stratz.com/images/dota2/primary_attributes/all.png"}
+                width={30}
+                height={30}
+              />
+              <div className="flex flex-col text-slate-300">
+                <span className="text-white font-bold">
+                  {uniAttrValue.toFixed(0)} (Gains {uniAttGain.toFixed(1)} per level)
+                </span>
+                <span>{attrDamageBonus(uniAttrValue * 0.7)}</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </Link>

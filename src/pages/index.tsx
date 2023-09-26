@@ -7,7 +7,7 @@ import { Button } from "@/components/Button";
 import { HeroCard } from "@/components/HeroCard";
 import { Header } from "@/components/Header";
 import { useHeroes } from "@/context/HeroContext";
-import { useHeroes2 } from "@/context/HeroContext2";
+import Image from "next/image";
 
 export default function Home() {
   const [primaryAttr, setPrimaryAttr] = useState<PrimaryAttr | null>(null);
@@ -23,21 +23,27 @@ export default function Home() {
   }
 
   const { heroes } = useHeroes();
-  const { heroes2 } = useHeroes2();
 
-  console.log(heroes2);
-  
-  const searchHeroes = heroes2 && Object.values(heroes2).filter((hero) => {
-    return (
-      // filtro:
-      // Se o 1º for true, ele pula pra segunda condição.
-      // Se possuir um valor(false), ele filtra baseado na condição imposta e passa o valor.
-      // A mesma regra repete-se para as duas linhas.
-      (!attackType || hero.stat.attackType === attackType) &&
-      (!primaryAttr || hero.stat.AttributePrimary === primaryAttr) &&
-      (!heroName || hero.displayName.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0)
-    );
-  });
+  const searchHeroes =
+    heroes &&
+    Object.values(heroes)
+      .filter((hero) => {
+        return hero.shortName !== "base";
+      })
+      .filter((hero) => {
+        return hero.shortName !== "target_dummy";
+      })
+      .filter((hero) => {
+        return (
+          // filtro:
+          // Se o 1º for true, ele pula pra segunda condição.
+          // Se possuir um valor(false), ele filtra baseado na condição imposta e passa o valor.
+          // A mesma regra repete-se para as duas linhas.
+          (!attackType || hero.stat.attackType === attackType) &&
+          (!primaryAttr || hero.stat.AttributePrimary === primaryAttr) &&
+          (!heroName || hero.displayName.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0)
+        );
+      });
 
   return (
     <>
@@ -78,7 +84,6 @@ export default function Home() {
                 <StrIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Str ? "black" : "#B62B24"} />
                 STRENGTH
               </Button>
-
               <Button
                 className={twMerge(
                   "border-agi font-extrabold  text-agi hover:shadow-agi",
@@ -92,7 +97,6 @@ export default function Home() {
                 <AgiIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Agi ? "black" : "#5BEF36"} />
                 AGILITY
               </Button>
-
               <Button
                 className={twMerge(
                   "border-int font-extrabold  text-int hover:shadow-int",
@@ -106,36 +110,24 @@ export default function Home() {
                 <IntIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Int ? "black" : "#36ACEF"} />
                 INTELLIGENCE
               </Button>
-
               <Button
                 className={twMerge(
-                  "hover:shadow-white border-none",
-                  "bg-gradient-to-r from-str via-agi to-int",
+                  "border-uni font-extrabold  text-uni hover:shadow-uni",
+                  primaryAttr === PrimaryAttr.Uni && "bg-uni text-black hover:shadow-yellow-300"
                 )}
                 onClick={() => {
                   handleAttr(PrimaryAttr.Uni);
                 }}
                 icon={PrimaryAttr.Uni}
               >
-                <div
-                  className={twMerge(
-                    "w-[142px] h-[30px]",
-                    "rounded-tr-lg rounded-bl-lg rounded-tl-2xl rounded-br-2xl",
-                    primaryAttr !== PrimaryAttr.Uni && "bg-hgray"
-                  )}
-                >
-                  <div className="flex w-full h-full justify-center items-center gap-1">
-                    {/* <IntIcon width={18} height={18} fill={primaryAttr === PrimaryAttr.Uni ? "black" : "#36ACEF"} /> */}
-                    <h1
-                      className={twMerge(
-                        "font-extrabold text-transparent bg-clip-text bg-gradient-to-r",
-                        primaryAttr === PrimaryAttr.Uni && "text-black"
-                      )}
-                    >
-                      UNIVERSAL
-                    </h1>
-                  </div>
-                </div>
+                <Image
+                  className="m-0"
+                  alt={"Universal Image"}
+                  src={"https://cdn.stratz.com/images/dota2/primary_attributes/all.png"}
+                  width={18}
+                  height={18}
+                />
+                UNIVERSAL
               </Button>
             </div>
 

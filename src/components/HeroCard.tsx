@@ -18,23 +18,23 @@ export const HeroCard = (props: HeroCardProps) => {
       onMouseOver={() => setIsMouseOver(true)}
       onMouseOut={() => setIsMouseOver(false)}
     >
-      {isMouseOver && <HeroHover heroInfos={hero} />}
+      {isMouseOver && <HeroHover heroHoverInfos={hero} />}
       <Image
-        alt={hero.localized_name + " Icon"}
-        src={"https://api.opendota.com" + hero.img}
-        width={256}
-        height={144}
+        alt={hero.displayName + " Image"}
+        src={"https://cdn.stratz.com/images/dota2/heroes/" + hero.shortName + "_vert.png"}
+        width={142}
+        height={188}
         className={twMerge(
-          "w-40 h-28 border-2 object-cover rounded-lg",
-          hero.primary_attr === PrimaryAttr.Str && "border-str",
-          hero.primary_attr === PrimaryAttr.Agi && "border-agi",
-          hero.primary_attr === PrimaryAttr.Int && "border-int",
-          hero.primary_attr === PrimaryAttr.Uni && "border-l-str border-y-agi border-r-int"
+          "w-inherit h-inherit border-2 object-cover rounded-lg",
+          hero.stat.AttributePrimary === PrimaryAttr.Str && "border-str",
+          hero.stat.AttributePrimary === PrimaryAttr.Agi && "border-agi",
+          hero.stat.AttributePrimary === PrimaryAttr.Int && "border-int",
+          hero.stat.AttributePrimary === PrimaryAttr.Uni && "border-uni"
         )}
         priority
       />
       <ul>
-        <li>{hero.localized_name}</li>
+        <li>{hero.displayName}</li>
       </ul>
     </div>
   );

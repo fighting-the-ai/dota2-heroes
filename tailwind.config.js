@@ -12,6 +12,7 @@ module.exports = {
         "str": "#B62B24",
         "agi": "#5BEF36",
         "int": "#36ACEF",
+        "uni": "#E4C62E",
         "deg": "#757575",
         "hgray": "#3F3F3F",
       },
