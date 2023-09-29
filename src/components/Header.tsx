@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { MenuIcon, PatchIcon, SearchIcon, UserIcon } from "./Icons";
+import { MenuIcon, SearchIcon, UserIcon } from "./Icons";
 
 interface HeaderInfos {
   onChange?: (name: string) => void;
@@ -37,7 +37,7 @@ export const Header = (props: HeaderInfos) => {
           height={80}
           priority
         />
-        <h1 className="text-center">Dota 2 </h1>
+        <h1 className="text-center">Dota 2</h1>
       </Link>
 
       {props.onChange ? (
@@ -55,7 +55,7 @@ export const Header = (props: HeaderInfos) => {
                 setSearching(false);
               }
             }}
-            placeholder="Buscar herói específico..."
+            placeholder="Search a specific hero..."
             className={twMerge(
               "h-10 pl-10 w-full sm:text-sm text-left ",
               "bg-hgray placeholder:italic text-slate-200 placeholder:text-slate-200",
@@ -69,9 +69,8 @@ export const Header = (props: HeaderInfos) => {
       ) : null}
 
       <div className="flex gap-3">
-        <PatchIcon fill="#D3D3D3" stroke="none" className="cursor-pointer" />
         <UserIcon fill="none" stroke="#D3D3D3" className="cursor-pointer" />
-        <MenuIcon fill="none" stroke="#D3D3D3" className="cursor-pointer" />
+        <MenuIcon stroke="#D3D3D3" className="cursor-pointer" />
       </div>
     </div>
   );

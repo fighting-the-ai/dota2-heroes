@@ -2,7 +2,7 @@ import { useState } from "react";
 import Head from "next/head";
 import { AttackType, PrimaryAttr } from "@/types";
 import { twMerge } from "tailwind-merge";
-import { AgiIcon, IntIcon, StrIcon, MeleeIcon, RangedIcon } from "@/components/Icons";
+import { AgiIcon, IntIcon, StrIcon, MeleeIcon, RangedIcon, ErrorIcon, LoadingIcon } from "@/components/Icons";
 import { Button } from "@/components/Button";
 import { HeroCard } from "@/components/HeroCard";
 import { Header } from "@/components/Header";
@@ -12,7 +12,7 @@ import Image from "next/image";
 export default function Home() {
   const [primaryAttr, setPrimaryAttr] = useState<PrimaryAttr | null>(null);
   const [attackType, setAttackType] = useState<AttackType | null>(null);
-  const [heroName, setHeroName] = useState("");
+  const [heroName, setHeroName] = useState<string>("");
 
   function handleAttackType(newAttackType: AttackType) {
     setAttackType((attackType) => (attackType === newAttackType ? null : newAttackType));
@@ -38,7 +38,9 @@ export default function Home() {
           // A mesma regra repete-se para as duas linhas.
           (!attackType || hero.stat.attackType === attackType) &&
           (!primaryAttr || hero.stat.AttributePrimary === primaryAttr) &&
-          (!heroName || hero.displayName.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0)
+          (!heroName ||
+            hero.displayName.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0 ||
+            hero.shortName.toLocaleLowerCase().indexOf(heroName.toLocaleLowerCase()) >= 0)
         );
       });
 
@@ -161,11 +163,27 @@ export default function Home() {
           </div>
 
           {/* RESULTS */}
-          <div className="text-white mx-28 flex justify-center flex-wrap gap-7 mb-56">
-            {searchHeroes?.length === 0 && <h1>NO HEROES FOUNDED</h1>}
-            {searchHeroes?.map((hero) => {
-              return <HeroCard key={hero.id} hero={hero} />;
-            })}
+          <div className="text-white mx-28 flex justify-center flex-wrap gap-7 mb-44">
+            {searchHeroes?.length === 0 && (
+              <div className="flex justify-center items-center">
+                <ErrorIcon className="fill-uni" width={50} height={50} />
+                <h1 className="text-5xl font-extrabold text-uni tracking-widest select-none">ERROR ERROR ERROR</h1>
+                <ErrorIcon className="fill-uni" width={50} height={50} />
+                <div className="bg-str px-60 font-bold text-lg rounded rotate-3 absolute select-none">
+                  The Hero Was Not Found
+                </div>
+              </div>
+            )}
+            {searchHeroes === null ? (
+              <div className="flex justify-center items-center gap-2 text-3xl">
+                <LoadingIcon className="w-16 h-16 text-gray-200 animate-spin dark:text-white fill-red-600" />
+                <h1>Loading heroes...</h1>
+              </div>
+            ) : (
+              searchHeroes?.map((hero) => {
+                return <HeroCard key={hero.id} hero={hero} />;
+              })
+            )}
           </div>
         </div>
       </main>
