@@ -18,14 +18,13 @@ export const Header = (props: HeaderInfos) => {
         "rounded-bl-2xl rounded-br-2xl"
       )}
     >
-      <Link href="/" className="flex justify-center items-center text-lg text-white cursor-pointer">
+      <Link href="/" className="flex justify-center items-center text-lg text-white cursor-pointer gap-2">
         <Image
           className="w-auto h-auto"
           alt="DotaLogo"
-          src="https://i.imgur.com/omV05Wh.png"
-          width={80}
-          height={80}
-          priority
+          src="/favicon.ico"
+          width={50}
+          height={50}
         />
         <h1 className="text-center">Dota 2</h1>
       </Link>
