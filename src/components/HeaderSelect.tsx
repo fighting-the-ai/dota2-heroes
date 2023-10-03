@@ -24,21 +24,14 @@ export default function HeaderSelect(props: HeaderSelectProps) {
       inputRef.current?.blur();
     }
   };
-  const clickOutside = (event: any) => {
-    if (showOptions && !divRef.current?.contains(event.target)) {
-      setShowOptions(false);
-    }
-  };
 
   useEffect(() => {
     document.addEventListener("keydown", escFunction, false);
-    document.addEventListener("click", clickOutside);
 
     return () => {
       document.removeEventListener("keydown", escFunction, false);
-      document.removeEventListener("click", clickOutside);
     };
-  }, [showOptions, clickOutside]);
+  }, [showOptions]);
 
   // DATABASE FILTER
   const searchHeroes =
