@@ -3,10 +3,9 @@ import { RoleIcon } from "./Icons";
 
 interface HeroRolesLevelsProps {
   level: number;
-  children: any
 }
 
-export default function HeroRolesLevels(props: HeroRolesLevelsProps) {
+export default function HeroRolesLevels(props: React.PropsWithChildren<HeroRolesLevelsProps>) {
   return (
     <div className="flex gap-2">
       <div className="ml-auto">

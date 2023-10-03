@@ -60,7 +60,7 @@ export default function Home() {
         )}
       >
         <Header
-          result={searchHeroes?.length === 0 ? true : false}
+          indexResult={searchHeroes?.length === 0 ? true : false}
           onChange={(value) => {
             setHeroName(value);
           }}
